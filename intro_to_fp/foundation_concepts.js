@@ -1,4 +1,5 @@
 // Directions: Translate from normal function to pure function
+/*
 let greeting = 'Hello, '
 
 const greet = (name) => {
@@ -18,7 +19,17 @@ console.log(greet('Guinevere.'))
 
 // But that isn't what we want! There are many many ways you can fix this 
 // function to make it pure. When it is pure it will also be resuable.
+*/
 
-// Desired output:
-//  Hello, Arthur. 
-//  Hello, Guinevere. 
+const greet = (name, base_greeting) => {
+  return `${base_greeting} ${name}`;
+};
+
+let greeting = "Hello, ";
+
+greet("Arthur.", greeting);
+
+console.log(greet("Arthur.", greeting));
+// expected output:
+//  Hello, Arthur.
+//  Hello, Arthur.
