@@ -4,12 +4,12 @@
 // hint - this will help with time of day: new Date().getHours()
 // -----------------------------------------------------------------
 function sayHello() {
-  const time = new Date().getHours();
-  if (time > 12 && time < 17) {
-    return "Good Afternoon";
-  }
+    const time = new Date().getHours();
+    if (time > 12 && time < 17) {
+      return "Good Afternoon";
+    }
 
-  return "Good Morning!";
+    return "Good Morning!";
 }
 
 console.log(sayHello());
