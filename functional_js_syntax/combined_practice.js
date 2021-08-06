@@ -11,7 +11,7 @@ const characters = [
     role: 'villain',
     universe: 'Star Wars',
     weapon: 'henchmen',
-    power_level: 200
+    power_level:  200
   },
   {
     name: 'Zoë Alleyne Washburne',
@@ -93,38 +93,30 @@ const characters = [
 ]
 
 // ----------------------------------------------------------
-
 // COMBINED PRACTICE 1
-
 // ----------------------------------------------------------
 
 // Create an array containing only the names of Captains from all universes.
 
-// Your Code here
-
 // expected output: ['Mal Reynolds', 'Kathryn Janeway']
 
+// solution:
+const captainNames = characters.filter(c => c.role == 'Captain').map(c => c.name)
+
+
 // ----------------------------------------------------------
-
 // COMBINED PRACTICE 2
-
 // ----------------------------------------------------------
 
 // Group all characters by universe in a multidimensional array
 
-// Your Code here
-
 // expected output:
 
-// [ 
-//  [ 
-//    { name: 'Marvin the Paranoid Android',
+// [ [ { name: 'Marvin the Paranoid Android',
 //       role: 'First Mate',
 //       universe: 'Hitchhikers Guide to the Galaxy',
 //       weapon: 'severe depression',
-//       power_level: 1000 
-//     } 
-//   ],
+//       power_level: 1000 } ],
 //   [ { name: 'Jabba the Hut',
 //       role: 'villain',
 //       universe: 'Star Wars',
@@ -186,26 +178,61 @@ const characters = [
 //       weapon: 'Zat gun',
 //       power_level: 120 } ] ]
 
+// solution: 
+
+const groupedCharacters = characters
+    .reduce((acc, curr, i, arr) => {
+        acc[curr.universe] = acc[curr.universe] === undefined ? [] : acc[curr.universe]
+        acc[curr.universe].push(curr)
+
+        if (i + 1 == arr.length) {
+            return Object.values(acc)
+        }
+
+        return acc
+ }, {})
+
 // ----------------------------------------------------------
-
 // COMBINED PRACTICE 3
-
 // ----------------------------------------------------------
 
 // Create an array containing characters' names who are the only character listed in their universe.
 
-// Your Code here
-
 // expected output: [ Marvin the Paranoid Android, Peter Venkman, Dr. Daniel Jackson ]
 
+// solution:
+const groupByUniverse = (acc, curr, i, arr) => {
+    acc[curr.universe] = acc[curr.universe] === undefined ? [] : acc[curr.universe]
+    acc[curr.universe].push(curr)
+
+    if (i + 1 == arr.length) {
+        return Object.entries(acc)
+            .filter(([_, characters]) => characters.length === 1)
+            .map(([_, characters]) => characters[0])
+    }
+
+    return acc
+}
+
+const soloCharacters = characters
+    .reduce(groupByUniverse, {})
+    .map(character => character.name)
+    .join(', ')
+
+console.log('soloCharacters:', soloCharacters)
+
 // ----------------------------------------------------------
-
 // COMBINED PRACTICE 4
-
 // ----------------------------------------------------------
 
 // What is the average power level across all characters?
 
-// Your code here
-
 // expected output: 68.71319452795147
+
+
+// solution:
+const avgPowerLvl = characters
+    .map(c => c.power_level)
+    .reduce((acc, curr, i) => (acc += curr) / i)
+
+console.log('avgPowerLvl:', avgPowerLvl)
