@@ -41,7 +41,20 @@ const hazardousFmt = hazardous.map(asteroid => {
 
 // Too Close for Comfort -----------------------------------
 // 4. A list of all objects (their id, name, max size in miles, and closest approach in miles) that have a miss_distance of less than 900,000 miles
-
+const tooClose = api_sample_data['near_earth_objects']['2019-12-02'].filter(asteroid => {
+ const closeApproach = asteroid['close_approach_data']
+ return closeApproach[0].miss_distance.miles < 900000
+})
+const tooCloseResults = tooClose.map(asteroid => {
+ const closeApproach = asteroid['close_approach_data']
+return {
+    id: asteroid['id'],
+    name: asteroid['name'],
+    maxSize: asteroid['estimated_diameter']['miles']['estimated_diameter_max'],
+    closestApproach: closeApproach[0]['miss_distance']['miles']
+ }
+})
+// expected output: [{"id":"3907553","name":"(2019 XH2)","maxSize":0.0061544743,"closestApproach":"775950.9423668918"}]
 
 // Alert ---------------------------------------------------
 // 5. Of all the near-earth objects for this date, find the time that the asteroid with the nearest miss will be closest to earth. 
