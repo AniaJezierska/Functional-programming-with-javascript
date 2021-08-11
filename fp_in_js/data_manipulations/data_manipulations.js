@@ -58,4 +58,14 @@ return {
 
 // Alert ---------------------------------------------------
 // 5. Of all the near-earth objects for this date, find the time that the asteroid with the nearest miss will be closest to earth. 
-
+const closest = apiSampleData.nearEarthObjects['2019-12-02'].reduce((closest, curr) => {
+const currDist = parseFloat(curr.closeApproachData[0].missDistance.miles)
+const closestDist = parseFloat(closest.closeApproachData[0].missDstance.miles)
+if (currDist > closestDist) {
+ return closest
+} else {
+ return curr
+}
+})
+console.log(closest.closeApproachData[0].missDistance.miles)
+// expected output: 775950.9423668918
