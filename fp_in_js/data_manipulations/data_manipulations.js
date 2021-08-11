@@ -9,6 +9,15 @@ console.log(nearEarthObjects.element_count);
 
 // Averages ------------------------------------------------
 // 2. What was the average absolute magnitude of all the near earth objects in this data set? Return the average absolute_magnitude_h.
+// Expected output: 22.613545454545452
+const asteroids = Object.values(nearEarthObjects.near_earth_objects).flat();
+asteroids.reduce((acc, curr, i, arr) => {
+if (i + 1 == arr.length) {
+//  at the very last item, take the accumulated sum and divide by the total number of items
+         return acc / arr.length
+          }
+         return acc += curr['absolute_magnitude_h']
+        }, 0)
 
 // Hint - you can achieve this multiple ways, but the reduce method can be a little-known but cool way to find averages. To do it though, you'll need to use the initial_value argument
 // For some extra challenge try using reduce with the initial setting argument. To learn more about it, take a look at this page: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
