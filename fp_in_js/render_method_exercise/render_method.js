@@ -33,3 +33,17 @@ render(root)
 {/* <nav>Menu</nav> */ }
 
 // Your Code Here
+const Menu = (show) => {
+    if(show) {
+        return (`
+                <nav>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>Login</li>
+                    </ul>
+                </nav>
+            `)
+   }
+    return `<nav>Menu</nav>`
+}
