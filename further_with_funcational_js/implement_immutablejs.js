@@ -4,14 +4,17 @@
 // The original code is provided below, how might you re-write both the store object and updateStore function with Immutable?
 // Remember if you need help, the docs should be the first place you look.
 
-let store = {
-    user: {
-        first_name: 'John',
-        last_name: 'Doe'
-    }
-}
+let store = Immutable.Map({ 
+    user: Immutable.Map({ 
+        firstName: 'John', 
+        lastName: 'Doe' 
+    }), 
+})
 
-const updateStore = (store, newState) => {
-    store = Object.assign(store, newState)
+function updateStore(state, newState) {
+    store = state.merge(newState)
     render(root, store)
 }
+
+updateStore(store, newState)
+console.log(store.getIn(['user', 'name']))
